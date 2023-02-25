@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "melodify"
+version = "0.0.0"
+description = "Create arbritrary melodies."
+authors = ["Yi Cao <caoyi06@qq.com>"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://github.com/xiaoyu2006/melodify"
+
+[tool.poetry.scripts]
+melodify = "melodify:main"
+
+[tool.poetry.dependencies]
+python = "~3.11"
+pyqt6 = "^6.4.2"
+pyside6 = "^6.4.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+pylint = "^2.16.2"
+pyinstaller = "^5.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

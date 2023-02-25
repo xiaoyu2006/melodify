@@ -1,0 +1,37 @@
+name: Build module
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+
+    strategy:
+      fail-fast: true
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        make install
+
+    # - name: Lint module
+    #   run: make lint
+
+    - name: Build artifacts
+      run: make dist
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: dist
